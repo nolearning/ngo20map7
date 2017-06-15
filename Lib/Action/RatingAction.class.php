@@ -1,48 +1,61 @@
 <?php
+
 class RatingAction extends BaseAction
 {
 
-    public function view($area = null)
+    public function view()
     {
-        $ratingModel = M('Rating');
-        if (isset($area)) {
-            $data = "FIND_IN_SET('" . $area . "', target_areas)";
-        }
-        $count = $ratingModel->where($data)->count();
+        $ratingModel = D('Rating');
         $listRows = C("LIST_RECORD_PER_PAGE");
-        import("@.Classes.TBPage");
-        $pager = new TBPage($count, $listRows);
-        $result = $ratingModel->where($data)->order("score desc")->limit($pager->firstRow, $listRows)->select();
+        $result = $ratingModel->order("score desc")->limit($listRows)->select();
         $ratingMap = array();
-//        $rating = "";
         foreach ($result as $item) {
-            $rating = $this->calcRating($item['score']);
+            $obj = (object) $item;
+            $rating = $obj->rating;
             if (!isset($ratingMap[$rating])) {
                 $ratingMap[$rating] = array($item);
             } else {
                 array_push($ratingMap[$rating], $item);
             }
         }
-        $this->assign('curArea', $area);
         $this->assign('ratingMap', $ratingMap);
-        $this->assign('pager_html', $pager->show());
         return $this->display();
     }
 
-    public function rating() {
+    public function filter($targetArea, $area, $rating, $page)
+    {
+        $ratingModel = M('Rating');
+        $listRows = C("LIST_RECORD_PER_PAGE");
+        if (isset($targetArea)) {
+            $ratingModel->where("FIND_IN_SET('" . $area . "', target_areas)");
+        }
+        if (isset($area)) {
+            $ratingModel->where(array('province|city' => array('like', "$area%")));
+        }
+        if (isset($rating)) {
+            $ratingModel->where(array('rating', $rating));
+        }
+        $offset = 0;
+        if (isset($page)) {
+            $offset = $page * $listRows;
+        }
+        $result = $ratingModel->field('account_id','name', 'rating')->order("score desc")->limit($offset, $listRows)->select();
+        if ($result) {
+            $this->ajaxReturn($result, 'query success', 1);
+        } else {
+            $this->ajaxReturn(0, 'result empty', 0);
+        }
+
+    }
+
+    public function rating()
+    {
         $id = user('id');
         $ratingModel = M('Rating');
-        $result = $ratingModel->where(array('account_id'=>$id))->select();
+        $result = $ratingModel->where(array('account_id' => $id))->select();
         $score = $result[0]['score'];
         $this->assign('score', $score);
         $this->assign('rating', $this->calcRating($score));
         return $this->display();
-    }
-
-    private function calcRating($score)
-    {
-        define(GAP_VALUE, 15);
-        $ratings = array("A+", "A", "B+", "B", "C+", "C");
-        return $ratings[count($ratings) - floor($score / GAP_VALUE)];
     }
 }
