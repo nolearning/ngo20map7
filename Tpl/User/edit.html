@@ -204,13 +204,15 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputWeibo">机构微博</label>
                                     <div class="controls">
-                                        <select name="weibo_provider" class="input-small"
-                                                value="{$user.weibo_provider}">
-                                            <option value="新浪微博">新浪微博</option>
-                                            <option value="腾讯微博">腾讯微博</option>
-                                            <option value="搜狐微博">搜狐微博</option>
-                                        </select>
-                                        @<input type="text" id="inputWeibo" name="weibo" class="" value="{$user.weibo}">
+                                        <div class="caption"></div>
+                                        <input type="text" id="inputWeibo" name="weibo" class="span6" value="{$user.weibo}">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputWeibo">微信公众号</label>
+                                    <div class="controls">
+                                        <div class="caption"></div>
+                                        <input type="text" id="inputWechat" name="wechat" class="span6" value="{$user.weibo}">
                                     </div>
                                 </div>
                                 <div class="submit-button controls">
