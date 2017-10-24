@@ -61,7 +61,7 @@
                 </div>
             </div>
             <ul class="rating-list"></ul>
-            <div class="rating-btn list-more">加载更多</div>
+            <div class="rating-btn list-more">共<span id="total"></span>家，点击加载更多</div>
     </div>
     <div class="partner-info">
         <div>
@@ -152,6 +152,7 @@
                 if (offset == 0) {
                     $('.list-more').show();
                     total = data.total;
+                    $('#total').text(total);
                 }
 
                 offset += data.ratings.length;
