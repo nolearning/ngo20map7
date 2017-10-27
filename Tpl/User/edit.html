@@ -496,8 +496,8 @@
                                             <option value="1">有</option>
                                             <option value="0">暂未获得奖项</option>
                                         </select>
-                                        <input type="text" name="reward_detail" class="inline-input hidden"
-                                               style="display:none;" placeholder="请列出具体奖项"/>
+                                        <input type="text" name="reward_detail" class="inline-input {$user.has_reward? 'hidden' : ''}"
+                                               {$user.has_reward? '': 'style=\"display:none;\"'} placeholder="请列出具体奖项" value="{$user.reward_detail|default=''}"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
