@@ -97,7 +97,7 @@
                     <tr><td>成立时间</td><td>{:assignStringWithDefaultValue($user['register_year'])}</td></tr>
                     <tr><td>联系人</td><td>{:assignStringWithDefaultValue($user['contact_name'])}</td></tr>
                     <tr><td>联系电话</td><td>{:assignStringWithDefaultValue($user['phone'])}</td></tr>
-                    <tr><td>网站</td><td>{:assignStringWithDefaultValue($user['website'])}</td></tr>
+                    <tr><td>网站</td><td>{:assignStringWithDefaultValue($user['website'], true)}</td></tr>
                     <tr><td>邮箱</td><td>
                         <?php if(isset($user['public_email'])): ?>
                         <a href="mailto:{$user['public_email']}">{$user['public_email']}</a>
@@ -106,8 +106,8 @@
                         <?php endif ?>
                     </td>
                     </tr>
-                    <tr><td>微博</td><td>{:assignStringWithDefaultValue($user['weibo'])}</td></tr>
-                    <tr><td>微信公众号</td><td>{:assignStringWithDefaultValue($user['wechat'])}</td></tr>
+                    <tr><td>微博</td><td>{:assignStringWithDefaultValue($user['weibo'], true)}</td></tr>
+                    <tr><td>微信公众号</td><td>{:assignStringWithDefaultValue($user['wechat'], true)}</td></tr>
                 </tbody>
             </table>
         </div>
@@ -157,8 +157,8 @@
                 <tbody>
                 <tr><td>资金来源</td><td>{:assignStringWithDefaultValue($user['fund_info'])}</td></tr>
                 <tr><td>财务人员</td><td>{:assignStringWithDefaultValue($user['accountant_status'])}</td></tr>
-                <tr><td>财务报告</td><td>{:existCh($user['financial_link'])}</td></tr>
-                <tr><td>财务公开链接</td><td>{:assignStringWithDefaultValue($user['financial_link'])}</td></tr>
+                <tr><td>财务报告</td><td>{:existCh($user['financial_link'], true)}</td></tr>
+                <tr><td>财务公开链接</td><td>{:assignStringWithDefaultValue($user['financial_link'], true)}</td></tr>
                 </tbody>
             </table>
         </div>
