@@ -27,7 +27,7 @@ class RatingAction extends BaseAction
         if($order == 0) {
             $orderStr = "rating_score desc, id";
         } else {
-            $orderStr = "isnull(register_year), str_to_date(register_year, '%Y'), isnull(register_month), str_to_date(register_month, '%M')";
+            $orderStr = "isnull(register_year), length(register_year) < 4, str_to_date(register_year, '%Y'), isnull(register_month), str_to_date(register_month, '%M')";
         }
 
         $ratings = $userModel->where($data)->order($orderStr)->limit($offset, $limit)

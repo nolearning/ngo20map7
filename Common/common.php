@@ -45,9 +45,9 @@ function extract_field($arr, $field){
     return array_unique($ret);
 }
 
-function assignStringWithDefaultValue($name, $default = '暂无') {
+function assignStringWithDefaultValue($name, $maybeUrl, $default = '暂无') {
     $url_pattern = '/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/';
-    if(preg_match($url_pattern, $name) == TRUE) {
+    if($maybeUrl && preg_match($url_pattern, $name) == TRUE) {
        $restult =  '<a href="';
        if (substr($name, 0, 4) != 'http') {
            $restult .= 'http://';
