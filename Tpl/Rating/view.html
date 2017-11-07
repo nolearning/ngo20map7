@@ -147,6 +147,11 @@
                 if (offset == 0) $('.rating-list').html('');
                 if (!data.ratings || data.ratings.length == 0) {
                     $('.list-more').hide();
+                    if (offset == 0) {
+                        $('.rating-list').html('<div style="text-align: center;margin:50px auto;font-size:1.5em;">' +
+                            '暂时没有找到您想要的结果，欢迎邀请更多的组织参与评级。' +
+                            '</div>')
+                    }
                     return;
                 }
                 if (offset == 0) {
