@@ -99,7 +99,7 @@ function MapView(){
                     item.addClass('active');
                     this.hoverTimeout = setTimeout(function(){
                         $('.result-panel').animate({
-                            scrollTop: elem.offset().top-$('.result-list li').eq(0).offset().top
+                            scrollTop: item.offset().top-$('.result-list li').eq(0).offset().top
                         }, 500);
                     }, 200);
                 });
