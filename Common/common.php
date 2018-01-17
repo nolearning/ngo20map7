@@ -45,7 +45,7 @@ function extract_field($arr, $field){
     return array_unique($ret);
 }
 
-function assignStringWithDefaultValue($name, $maybeUrl, $default = '暂无') {
+function assignStringWithDefaultValue($name, $maybeUrl, $default = '') {
     $url_pattern = '/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/';
     if($maybeUrl && preg_match($url_pattern, $name) == TRUE) {
        $restult =  '<a href="';
@@ -60,5 +60,5 @@ function assignStringWithDefaultValue($name, $maybeUrl, $default = '暂无') {
 }
 
 function existCh($b) {
-    return $b ? '有' : '无';
+    return $b ? '有' : '';
 }
