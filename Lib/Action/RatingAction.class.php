@@ -7,7 +7,7 @@ class RatingAction extends BaseAction
 
         $data = "type = 'ngo' and rating_level IS NOT NULL and is_checked=1 and enabled=1 ";
         if(isset($work_field) && $work_field != "") {
-            $data .= " and MULTI_FIND_IN_SET('" . $work_field . "', work_field)";
+           $data .= " and CONCAT(',', `work_field`, ',') REGEXP '[, ]". str_replace(',', '|', $work_field) . "[, ]'";
         }
         if(isset($location) && $location != "") {
             $data .= " and (province like '" . $location ."%' or city like '" . $location ."%')";
